@@ -14,7 +14,7 @@ namespace CST8359_Lab1
             char choice = 'c';
             do
             {
-                displayMenu();
+                DisplayMenu();
                 string userInput = Console.ReadLine();
                 try
                 {
@@ -36,31 +36,33 @@ namespace CST8359_Lab1
                 switch (choice)
                 {
                     case '1':
-                        Console.WriteLine(readFile());
+                        Console.WriteLine(ReadFile());
                         break;
                     case '2':
-                        timeCount(() => bubbleSortStrings());
+                        words.Clear();
+                        // Everytime when case 2 runs, it calls CreateFileList method, thus it cannot be time count 0
+                        TimeCount(() => BubbleSort(CreateFileIList(words)));
                         break;
                     case '3':
-                        timeCount(() => lambdaSort());
+                        TimeCount(() => LambdaSort());
                         break;
                     case '4':
-                        countDistinct();
+                        CountDistinct();
                         break;
                     case '5':
-                        firstTen();
+                        FirstTen();
                         break;
                     case '6':
-                        wordStartWithJ();
+                        WordStartWithJ();
                         break;
                     case '7':
-                        wordEndWithD();
+                        WordEndWithD();
                         break;
                     case '8':
-                        wordLongerThanFour();
+                        WordLongerThanFour();
                         break;
                     case '9':
-                        wordLessThanThreeAndStartWithA();
+                        WordLessThanThreeAndStartWithA();
                         break;
                     case 'x':
                         Console.WriteLine("Exiting... ");
@@ -71,7 +73,7 @@ namespace CST8359_Lab1
                 }
             } while (choice != 'x');
         }
-        private static void displayMenu()
+        private static void DisplayMenu()
         {
 
             Console.WriteLine();
@@ -91,23 +93,27 @@ namespace CST8359_Lab1
             Console.WriteLine();
             Console.WriteLine("Make a selection: ");
         }
-        private static void createFileIList(IList<string> words)
+        private static IList<string> CreateFileIList(IList<string> words)
         {
-            using StreamReader sr = new StreamReader(@"C:\Users\Yanni\source\repos\CST8359\Lab1\CST8359-Lab1\Words.txt");
+            using StreamReader sr = new StreamReader(@"C:\Users\Yanni\source\repos\CST8359\CST8359-Yanni-Li-Labs\Lab1\CST8359-Lab1\Words.txt");
             string line;
             while ((line = sr.ReadLine()) != null)
             {
                 words.Add(line);
             }
             sr.Close();
+            
+            return words;
         }
-        private static string readFile()
+        private static string ReadFile()
         {
             try
             {
                 words.Clear();
-                createFileIList(words);
+                CreateFileIList(words);
+                Console.WriteLine("Reading file ... ");
                 string message = "There are " + words.Count + " words in the file.";
+                Console.WriteLine("Reading complete. ");
                 return message;
             }
             catch (Exception e)
@@ -117,12 +123,10 @@ namespace CST8359_Lab1
             }
 
         }
-        private static void bubbleSortStrings()
+        public static IList<string> BubbleSort(IList<string> arr)
         {
-            string[] arr = File.ReadAllLines(@"C:\Users\Yanni\source\repos\CST8359\Lab1\CST8359-Lab1\Words.txt");
-            int n = arr.Length;
+            int n = arr.Count;
             String temp;
-            // Sorting strings using bubble sort
             for (int j = 0; j < n - 1; j++)
             {
                 for (int i = j + 1; i < n; i++)
@@ -135,52 +139,54 @@ namespace CST8359_Lab1
                     }
                 }
             }
+            return arr;
         }
-        private static void lambdaSort()
+
+        private static void LambdaSort()
         {
             IEnumerable<string> sortedEnum = words.OrderBy(f => f.Length);
             IList<string> sortedList = sortedEnum.ToList();
         }
-        private static void countDistinct()
+        private static void CountDistinct()
         {
             int count = words.Distinct().Count();
             Console.WriteLine("There are " + count + " dictinct words.");
         }
-        private static void firstTen()
+        private static void FirstTen()
         {
             string[] selectedWords = words.Take(10).Select(i => i.ToString()).ToArray();
             foreach (var n in selectedWords)
                 Console.WriteLine("First ten words are : " + n);
         }
-        private static void wordStartWithJ()
+        private static void WordStartWithJ()
         {
             var resultList = words.Where(r => r.StartsWith("j"));
             Console.WriteLine("Number of words start with j are : " + resultList.Count());
             foreach (var n in resultList)
                 Console.WriteLine("Words start with j are : " + n);
         }
-        private static void wordEndWithD()
+        private static void WordEndWithD()
         {
             var resultList = words.Where(r => r.EndsWith("d"));
             Console.WriteLine("Words end with d are : " + resultList.Count());
             //foreach (var n in resultList)
             //    Console.WriteLine("Words end with d are : " + n);
         }
-        private static void wordLongerThanFour()
+        private static void WordLongerThanFour()
         {
             var query = words.Where(s => s.Length > 4);
             foreach (var n in query)
                 Console.WriteLine("Words longer than four are : " + n);
             Console.WriteLine("Number of words longer than four are : " + query.Count());
         }
-        private static void wordLessThanThreeAndStartWithA()
+        private static void WordLessThanThreeAndStartWithA()
         {
             var query = words.Where(s => s.Length < 3 && s.StartsWith("a"));
             foreach (var n in query)
                 Console.WriteLine("Words less than three and start with a are: " + n);
             Console.WriteLine("Number of words less than three and start with a are: " + query.Count());
         }
-        private static void timeCount(Action myMethod)
+        private static void TimeCount(Action myMethod)
         {
             var watch = System.Diagnostics.Stopwatch.StartNew();
             myMethod.Invoke();
