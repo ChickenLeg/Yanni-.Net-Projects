@@ -1,0 +1,33 @@
+﻿@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Count";
+}
+@ViewData["Count"]
+<form asp-controller="Home" asp-action="Razor" method="get">
+    <input type="submit" value="PlayAgain" />
+</form>
+@{
+    int counter = Int32.Parse(ViewData["count"].ToString());
+}
+@for (int i = counter; i > 0; i--)
+{
+if(i != 1) 
+{
+<p>
+    @i green bottles standing on the wall,<br />
+    @i green bottles standing on the wall,<br />
+    And if one green bottle should accidentally fall,<br />
+    There'll be @(i-1) green bottles standing on the wall.<br />
+</p>
+}
+@if(i == 1){
+<p>
+    @i green bottle standing on the wall,<br />
+    @i green bottle standing on the wall,<br />
+    And if one green bottle should accidentally fall,<br />
+    There'll be no green bottles standing on the wall.<br />
+</p>
+}
+}
+
+
