@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewData["Title"]</title>
+    <link href="~/css/StyleSheet.css" rel="stylesheet" />
+</head>
+<body>
+    <header>
+        <h2>Welcome to Yanni's Lab3 !</h2>
+        <h3>My name is Yanni Li.</h3>
+        <br />
+        <div class="container">
+            <class ="nav-item">
+                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                <class ="nav-item">
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Razor">Show the Song!</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <class ="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="CreatePerson">Persons</a>
+</div>
+    </header>
+    <div class="content">
+        @RenderBody()
+    </div>
+    <footer>
+        <table>
+            <tr>
+                <td>
+                    A Layout file allows us to reuse portions of View content (common elements) instead of implementing these visual elements on every page.
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    The _Layout.cshtml is under Views - Shared folder, it's the default layout.<br />
+                    It allows us specify the HTML container layout of a site in one place and apply the HTML container layout across multiple pages in the site.<br />
+                    _ViewImports and ViewStart.cshtml is under Views folder, others all goes to Views - Home folder.
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    _ViewStart.cshtml is used to place common UI logic across the Views in the folder, where it is located and define all the defaults.
+                </td>
+            </tr>
+        </table>
+    </footer>
+</body>
+</html>
