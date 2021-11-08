@@ -1,0 +1,44 @@
+﻿@page
+@model Lab5.Pages.AnswerImages.CreateModel
+@{
+    Layout = "_Layout";
+}
+
+<div class="container">
+    <main role="main" class="pb-3">
+        <h1>Upload</h1>
+        <h4>Answer questions via image upload</h4>
+        <hr />
+        <div class="row">
+            <div class="col-md-6">
+                <form action="Create" enctype="multipart/form-data" method="post">
+                    <div class="form-group">
+                        <div class="custom-radio">
+                            @Html.RadioButtonFor(model => model.AnswerImage.question, 0)
+                            "What will the computers look like in 20 years?"
+                            <br />
+                            @Html.RadioButtonFor(model => model.AnswerImage.question, 1)
+                            "What will the earth look like in 20 years?"
+                            <br />
+                        </div>
+                        <div class="btn btn-sm float-left">
+                            <input name="file" type="file" accept="image/jpg, image/png, image/jpeg">
+                        </div>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" name="upload" class="btn btn-primary">
+                                Upload Now
+                            </button>
+                        </div>
+                </form>
+            </div>
+        </div>
+    </main>
+</div>
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
