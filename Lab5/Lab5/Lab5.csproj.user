@@ -11,6 +11,6 @@
     <WebStackScaffolding_IsReferencingScriptLibrariesSelected>True</WebStackScaffolding_IsReferencingScriptLibrariesSelected>
     <WebStackScaffolding_LayoutPageFile />
     <WebStackScaffolding_DbContextTypeFullName>Lab5.Data.AnswerImageDataContext</WebStackScaffolding_DbContextTypeFullName>
-    <NameOfLastUsedPublishProfile>YanniLab5 - Web Deploy</NameOfLastUsedPublishProfile>
+    <NameOfLastUsedPublishProfile>C:\Users\wchen\source\repos\Lab5\Lab5\Properties\PublishProfiles\yanniLab5 - Web Deploy.pubxml</NameOfLastUsedPublishProfile>
   </PropertyGroup>
 </Project>

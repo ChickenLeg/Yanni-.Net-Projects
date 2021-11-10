@@ -38,7 +38,7 @@ namespace Lab5.Migrations
 
                     b.HasKey("AnswerImageId");
 
-                    b.ToTable("AnswerImages");
+                    b.ToTable("AnswerImage");
                 });
 #pragma warning restore 612, 618
         }

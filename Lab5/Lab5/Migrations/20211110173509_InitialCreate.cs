@@ -7,7 +7,7 @@ namespace Lab5.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "AnswerImages",
+                name: "AnswerImage",
                 columns: table => new
                 {
                     AnswerImageId = table.Column<int>(type: "int", nullable: false)
@@ -18,14 +18,14 @@ namespace Lab5.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AnswerImages", x => x.AnswerImageId);
+                    table.PrimaryKey("PK_AnswerImage", x => x.AnswerImageId);
                 });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "AnswerImages");
+                name: "AnswerImage");
         }
     }
 }

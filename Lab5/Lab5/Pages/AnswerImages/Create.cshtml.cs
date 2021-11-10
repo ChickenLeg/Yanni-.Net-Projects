@@ -46,7 +46,7 @@ namespace Lab5.Pages.AnswerImages
             // Create the container and return a container client object
             try
             {
-                containerClient = await _blobServiceClient.CreateBlobContainerAsync(earthContainerName);
+                containerClient = await _blobServiceClient.CreateBlobContainerAsync(containerName);
                 // Give access to public
                 containerClient.SetAccessPolicy(Azure.Storage.Blobs.Models.PublicAccessType.BlobContainer);
             }

@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Lab5.Migrations
 {
     [DbContext(typeof(AnswerImageDataContext))]
-    [Migration("20211106200050_InitialCreate")]
+    [Migration("20211110173509_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -40,7 +40,7 @@ namespace Lab5.Migrations
 
                     b.HasKey("AnswerImageId");
 
-                    b.ToTable("AnswerImages");
+                    b.ToTable("AnswerImage");
                 });
 #pragma warning restore 612, 618
         }
