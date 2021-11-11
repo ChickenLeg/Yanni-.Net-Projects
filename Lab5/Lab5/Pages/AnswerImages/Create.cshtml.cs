@@ -35,7 +35,7 @@ namespace Lab5.Pages.AnswerImages
         {
             BlobContainerClient containerClient;
             string containerName;
-            if (AnswerImage.question == Question.Earth)
+            if (AnswerImage.question == Models.Question.Earth)
             {
                 containerName = earthContainerName;
             }
@@ -83,7 +83,8 @@ namespace Lab5.Pages.AnswerImages
                 var image = new AnswerImage
                 {
                     Url = blockBlob.Uri.AbsoluteUri,
-                    FileName = randomFileName
+                    FileName = randomFileName,
+                    question = AnswerImage.question
                 };
 
                 _context.AnswerImages.Add(image);

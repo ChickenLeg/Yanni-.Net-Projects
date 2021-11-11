@@ -1,6 +1,7 @@
 ﻿@page
 @model Lab5.Pages.AnswerImages.IndexModel
 @{
+    ViewData["Title"] = "Index";
     Layout = "_Layout";
 }
 <p>
@@ -13,10 +14,10 @@
                 @Html.DisplayNameFor(model => model.AnswerImage[0].FileName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.AnswerImage[0].Url)
+                @Html.DisplayNameFor(model => model.AnswerImage[0].question)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.AnswerImage[0].question)
+                Image
             </th>
             <th></th>
         </tr>
@@ -29,14 +30,12 @@
                     @Html.DisplayFor(modelItem => item.FileName)
                 </td>
                 <td>
-                    <img src="@Html.DisplayFor(modelItem => item.Url)" width="400px" />
-                </td>
-                <td>
                     @Html.DisplayFor(modelItem => item.question)
                 </td>
                 <td>
-                    @*<a asp-page="./Edit" asp-route-id="@item.AnswerImageId">Edit</a> |
-                    <a asp-page="./Details" asp-route-id="@item.AnswerImageId">Details</a> |*@
+                    <img src="@item.Url" style="max-width: 400px;" />
+                </td>
+                <td>
                     <a asp-page="./Delete" asp-route-id="@item.AnswerImageId">Delete</a>
                 </td>
             </tr>

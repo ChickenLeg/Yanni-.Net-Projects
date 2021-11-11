@@ -15,6 +15,7 @@ namespace Lab5.Models
         }
 
         [Required]
+        [StringLength(50)]
         [DisplayName("File Name")]
         public string FileName
         {
@@ -24,7 +25,7 @@ namespace Lab5.Models
 
         [Required]
         [Url]
-        [DisplayName("Image")]
+        [DisplayName("URL")]
         public string Url
         {
             get;

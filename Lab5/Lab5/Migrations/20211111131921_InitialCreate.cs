@@ -12,7 +12,7 @@ namespace Lab5.Migrations
                 {
                     AnswerImageId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    FileName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FileName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Url = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     question = table.Column<int>(type: "int", nullable: false)
                 },
