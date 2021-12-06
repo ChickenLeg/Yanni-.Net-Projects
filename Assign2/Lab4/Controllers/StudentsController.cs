@@ -59,11 +59,43 @@ namespace Lab4.Controllers
         }
 
         [HttpGet]
-        public ActionResult EditMemberships(string id, bool member)
+        public ActionResult EditMembership(int? id)
         {
-            var studentMembership = new CommunityMembershipViewModel();
-            // TODO: how to use bool isNumber
-            return View(studentMembership);
+            
+            var communities = _context.Communities.ToList();
+            var studentMembership = new List<StudentMembershipViewModel>();
+            foreach (var community in communities)
+            {
+                studentMembership.Add(new StudentMembershipViewModel
+                {
+                    CommunityId = community.CommunityID,
+                    IsMember = false
+                });
+            }
+            var joinCommunity = (from c in _context.Communities
+                                  join m in _context.CommunityMemberships
+                                  on c.CommunityID equals m.CommunityID
+                                  where m.StudentID == id
+                                  select c).ToList();
+            foreach (var f in studentMembership)
+            {
+                foreach(var m in joinCommunity)
+                {
+                    if(f.CommunityId == m.CommunityID)
+                    {
+                        f.IsMember = true;
+                    }
+                }
+            }
+            
+            return View(studentMembership.Select(
+                s => new StudentMembershipViewModel
+                {
+                    CommunityId = s.CommunityId,
+                    Title = s.Title,
+                    Student = s.Student,
+                    Memberships = s.Memberships
+                }));
         }
 
         [ValidateAntiForgeryToken]
