@@ -15,6 +15,6 @@
     <WebStackScaffolding_DbContextTypeFullName>Lab4.Data.SchoolCommunityContext</WebStackScaffolding_DbContextTypeFullName>
     <WebStackScaffolding_IsAsyncSelected>False</WebStackScaffolding_IsAsyncSelected>
     <WebStackScaffolding_IsViewGenerationSelected>True</WebStackScaffolding_IsViewGenerationSelected>
-    <NameOfLastUsedPublishProfile>C:\Users\wchen\source\repos\Lab4\Lab4\Properties\PublishProfiles\yanniLab4 - Web Deploy.pubxml</NameOfLastUsedPublishProfile>
+    <NameOfLastUsedPublishProfile>C:\Users\wchen\source\repos\Assign2\Lab4\Properties\PublishProfiles\yanniLab4 - Web Deploy1.pubxml</NameOfLastUsedPublishProfile>
   </PropertyGroup>
 </Project>

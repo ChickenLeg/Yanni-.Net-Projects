@@ -30,15 +30,12 @@ namespace Lab4.Controllers
                   .OrderBy(i => i.CommunityID)
                   .ToListAsync();
 
-            if (Id != null)
-            {
-                ViewData["CommunityID"] = Id;
-                viewModel.Students = (from student in _context.Students
-                                      join community in _context.CommunityMemberships
-                                        on student.StudentID equals community.StudentID
-                                      where community.CommunityID == Id
-                                      select student);
-            }
+            ViewData["CommunityID"] = Id;
+            viewModel.Students = (from student in _context.Students
+                                  join community in _context.CommunityMemberships
+                                    on student.StudentID equals community.StudentID
+                                  where community.CommunityID == Id
+                                  select student);
 
             return View(viewModel);
         }

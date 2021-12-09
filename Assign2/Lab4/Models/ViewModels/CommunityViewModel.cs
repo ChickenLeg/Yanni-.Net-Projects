@@ -9,5 +9,7 @@ namespace Lab4.Models.ViewModels
         public IEnumerable<Community> Communities { get; set; }
 
         public IEnumerable<CommunityMembership> CommunityMemberships { get; set; }
+
+        public IEnumerable<Advertisement> Advertisements { get; set; }
     }
 }

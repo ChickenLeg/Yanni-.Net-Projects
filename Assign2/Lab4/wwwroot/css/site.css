@@ -5,6 +5,7 @@ a.navbar-brand {
     white-space: normal;
     text-align: center;
     word-break: break-all;
+    background-color: #70818C;
 }
 
 /* Provide sufficient contrast against white background */
@@ -13,7 +14,7 @@ a {
 }
 
 .btn-primary {
-    color: #fff;
+    color: #70818C;
     background-color: #1b6ec2;
     border-color: #1861ac;
 }

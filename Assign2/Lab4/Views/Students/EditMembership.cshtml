@@ -1,4 +1,4 @@
-﻿@model Lab4.Models.ViewModels.StudentMembershipViewModel
+﻿@model Lab4.Models.ViewModels.CommunityMembershipViewModel
 
 @{
     Layout = "_Layout";
@@ -15,27 +15,28 @@
                 Full Name
             </th>
             <th>
-                @Model.Student.First().FullName
+                @Model.Student.FullName
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.Memberships)
+        @foreach (var item in Model.Membership)
         {
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.Title)
                 </td>
                 <td>
-                    @if (Model.Student.First().CommunityMemberships.Any(m => m.CommunityID == item.CommunityID))
+                    @if (item.IsMember)
                     {
-                        @Html.ActionLink("Unregister", "RemoveMemberships", "Students",
-                       new { studentId = Model.Student.First().StudentID, communityId = item.CommunityID }) }
+                        @Html.ActionLink("Unregister", "EditMembership", "Students", new { id = Model.Student.StudentID, communityId = item.CommunityId, operation = 1 })
+                    }
                     else
                     {
-                        @Html.ActionLink("Register", "AddMemberships", "Students",
-                       new { studentId = Model.Student.First().StudentID, communityId = item.CommunityID })}
+                        @Html.ActionLink("Register", "EditMembership", "Students", new { id = Model.Student.StudentID, communityId = item.CommunityId, operation = 0 })
+                    }
+
                 </td>
             </tr>
         }

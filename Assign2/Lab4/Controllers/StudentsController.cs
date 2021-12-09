@@ -21,8 +21,8 @@ namespace Lab4.Controllers
         // GET: Students
         public async Task<IActionResult> Index(int? id)
         {
-            var studentMembership = new StudentMembershipViewModel();
-            studentMembership.Student = await _context.Students
+            var studentMembership = new CommunityViewModel();
+            studentMembership.Students = await _context.Students
                   .Include(i => i.CommunityMemberships)
                   .AsNoTracking()
                   .OrderBy(i => i.StudentID)
@@ -31,11 +31,11 @@ namespace Lab4.Controllers
             if (id != null)
             {
                 ViewData["StudentID"] = id;
-                studentMembership.Memberships = (from c in _context.Communities
+                studentMembership.Communities = (from c in _context.Communities
                                                  join m in _context.CommunityMemberships
                                                  on c.CommunityID equals m.CommunityID
                                                  where m.StudentID == id
-                                                 select c).ToList();
+                                                 select c);
             }
             return View(studentMembership);
         }
@@ -59,69 +59,64 @@ namespace Lab4.Controllers
         }
 
         [HttpGet]
-        public ActionResult EditMembership(int? id)
+        public ActionResult EditMembership(int? id, string? communityId, int? operation)
         {
-            
+            var view = new CommunityMembershipViewModel();
+            view.Membership = new List<StudentMembershipViewModel>();
+            if (id != null && communityId != null)
+            {
+                if (operation == 1)
+                {
+                    var studentMembership = new CommunityMembership
+                    {
+                        StudentID = (int)id,
+                        CommunityID = communityId
+                    };
+                    _context.CommunityMemberships.Remove(studentMembership);
+                    _context.SaveChanges();
+                }
+                else if (operation == 0)
+                {
+                    var studentMembership = new CommunityMembership
+                    {
+                        StudentID = (int)id,
+                        CommunityID = communityId
+                    };
+                    _context.CommunityMemberships.Add(studentMembership);
+                    _context.SaveChanges();
+                }
+            }
             var communities = _context.Communities.ToList();
-            var studentMembership = new List<StudentMembershipViewModel>();
+            var joinCommunity = (from c in _context.Communities
+                                 join m in _context.CommunityMemberships
+                                 on c.CommunityID equals m.CommunityID
+                                 where m.StudentID == id
+                                 select c).ToList();
+            var student1 = (from s in _context.Students
+                           where s.StudentID == id
+                           select s).ToList().First();
+            view.Student = student1;
             foreach (var community in communities)
             {
-                studentMembership.Add(new StudentMembershipViewModel
+                view.Membership.Add(new StudentMembershipViewModel
                 {
                     CommunityId = community.CommunityID,
+                    Title = community.Title,
                     IsMember = false
                 });
             }
-            var joinCommunity = (from c in _context.Communities
-                                  join m in _context.CommunityMemberships
-                                  on c.CommunityID equals m.CommunityID
-                                  where m.StudentID == id
-                                  select c).ToList();
-            foreach (var f in studentMembership)
+            foreach (var f in view.Membership)
             {
-                foreach(var m in joinCommunity)
+                foreach (var m in joinCommunity)
                 {
-                    if(f.CommunityId == m.CommunityID)
+                    if (f.CommunityId == m.CommunityID)
                     {
                         f.IsMember = true;
                     }
                 }
             }
-            
-            return View(studentMembership.Select(
-                s => new StudentMembershipViewModel
-                {
-                    CommunityId = s.CommunityId,
-                    Title = s.Title,
-                    Student = s.Student,
-                    Memberships = s.Memberships
-                }));
-        }
 
-        [ValidateAntiForgeryToken]
-        public ActionResult AddMemberships(int StudentID, string communityID)
-        {
-            var studentMembership = new CommunityMembership
-            {
-                StudentID = StudentID,
-                CommunityID = communityID
-            };
-            _context.CommunityMemberships.Add(studentMembership);
-            _context.SaveChanges();
-            return RedirectToAction(nameof(Index));
-        }
-
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteMemberships(int StudentID, string communityID)
-        {
-            var studentMembership = new CommunityMembership
-            {
-                StudentID = StudentID,
-                CommunityID = communityID
-            };
-            _context.CommunityMemberships.Remove(studentMembership);
-            _context.SaveChanges();
-            return RedirectToAction(nameof(Index));
+            return View(view);
         }
 
         // GET: Students/Create

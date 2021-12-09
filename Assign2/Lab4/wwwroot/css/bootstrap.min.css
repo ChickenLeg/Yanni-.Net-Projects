@@ -57,9 +57,9 @@ body {
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.5;
-    color: #212529;
+    color: #70818C;
     text-align: left;
-    background-color: #fff
+    background-color: #A3C9D9
 }
 
 [tabindex="-1"]:focus {
@@ -74,7 +74,8 @@ hr {
 
 h1, h2, h3, h4, h5, h6 {
     margin-top: 0;
-    margin-bottom: .5rem
+    margin-bottom: .5rem;
+    color: #70818C
 }
 
 p {
