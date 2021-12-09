@@ -1,0 +1,45 @@
+﻿@model Lab4.Models.ViewModels.CommunityMembershipViewModel
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Edit Membership";
+}
+
+<h1>Edit</h1>
+<h2>Student</h2>
+<hr />
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Full Name
+            </th>
+            <th>
+                @Model.Student.FullName
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Membership)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @if (item.IsMember)
+                    {
+                        @Html.ActionLink("Unregister", "EditMembership", "Students", new { id = Model.Student.StudentID, communityId = item.CommunityId, operation = 1 })
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Register", "EditMembership", "Students", new { id = Model.Student.StudentID, communityId = item.CommunityId, operation = 0 })
+                    }
+
+                </td>
+            </tr>
+        }
+    </tbody>
+    @Html.ActionLink("Back to List", "Index")
+</table>
